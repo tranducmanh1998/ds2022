@@ -5,9 +5,10 @@
 /*
  * File transfer type declare
  */
-typedef char FileName[255];
-typedef char FileList[5000]; /* maximum 5000 characters of list */
+
 typedef char Chunk[1000];
+typedef char FileName[255];
+
 struct Content {
     int fd;
     int size;
@@ -48,6 +49,6 @@ program FILE_TRANSFER {
          * list of file is string separated by newline
          * @return {FileList} list of files presented as a string
          */
-        FileList listFile() = 4;
+        Content listFile(void) = 4;
     } = 0;
 } = 0;

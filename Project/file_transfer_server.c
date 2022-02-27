@@ -5,6 +5,9 @@
  */
 
 #include "file_transfer.h"
+#include <dirent.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 int* setfilename_0_svc(char* argp, struct svc_req* rqstp)
 {
@@ -13,7 +16,7 @@ int* setfilename_0_svc(char* argp, struct svc_req* rqstp)
     /*
      * insert server code here
      */
-
+    result = open(argp, O_CREAT | O_RDWR, 0666);
     return &result;
 }
 
@@ -25,7 +28,7 @@ appendcontent_0_svc(Content* argp, struct svc_req* rqstp)
     /*
      * insert server code here
      */
-
+    result = (write(argp->fd, argp->array, argp->size) > 0);
     return &result;
 }
 
@@ -37,7 +40,8 @@ readcontent_0_svc(int* argp, struct svc_req* rqstp)
     /*
      * insert server code here
      */
-
+    int size = read(*argp, result.array, 1000);
+    result.size = size;
     return &result;
 }
 
@@ -49,17 +53,33 @@ closefile_0_svc(int* argp, struct svc_req* rqstp)
     /*
      * insert server code here
      */
-
+    result = (close(*argp) == 0);
     return &result;
 }
 
-char* listfile_0_svc(void* argp, struct svc_req* rqstp)
+Content* listfile_0_svc(void* argp, struct svc_req* rqstp)
 {
-    static char result;
+    static Content result;
 
     /*
      * insert server code here
      */
+    int idx = 0;                   // index of result
+    DIR* dirStream = opendir("."); // point to directory stream
+    struct dirent* dir;            // hold element in directory stream
 
+    while ((dir = readdir(dirStream)) != NULL) {
+        /* copy name to string */
+        memcpy(result.array + idx, dir->d_name, strlen(dir->d_name));
+        idx += strlen(dir->d_name);
+
+        /* copy space to string */
+        memcpy(result.array + idx, " ", 1);
+        idx += 1;
+    }
+    closedir(dirStream);
+
+    memcpy(result.array + idx, "\0", 1); // end string
+    result.size = idx + 1;
     return &result;
 }

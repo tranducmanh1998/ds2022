@@ -6,33 +6,22 @@
 #include "file_transfer.h"
 
 bool_t
-xdr_FileName (XDR *xdrs, FileName objp)
-{
-	register int32_t *buf;
-
-	 if (!xdr_vector (xdrs, (char *)objp, 255,
-		sizeof (char), (xdrproc_t) xdr_char))
-		 return FALSE;
-	return TRUE;
-}
-
-bool_t
-xdr_FileList (XDR *xdrs, FileList objp)
-{
-	register int32_t *buf;
-
-	 if (!xdr_vector (xdrs, (char *)objp, 5000,
-		sizeof (char), (xdrproc_t) xdr_char))
-		 return FALSE;
-	return TRUE;
-}
-
-bool_t
 xdr_Chunk (XDR *xdrs, Chunk objp)
 {
 	register int32_t *buf;
 
 	 if (!xdr_vector (xdrs, (char *)objp, 1000,
+		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	return TRUE;
+}
+
+bool_t
+xdr_FileName (XDR *xdrs, FileName objp)
+{
+	register int32_t *buf;
+
+	 if (!xdr_vector (xdrs, (char *)objp, 255,
 		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	return TRUE;
