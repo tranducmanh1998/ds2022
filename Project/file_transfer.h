@@ -8,11 +8,9 @@
 
 #include <rpc/rpc.h>
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 typedef char FileName[255];
 
@@ -21,9 +19,9 @@ typedef char FileList[5000];
 typedef char Chunk[1000];
 
 struct Content {
-	int fd;
-	int size;
-	Chunk array;
+    int fd;
+    int size;
+    Chunk array;
 };
 typedef struct Content Content;
 
@@ -32,54 +30,54 @@ typedef struct Content Content;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define setFileName 0
-extern  int * setfilename_0(char *, CLIENT *);
-extern  int * setfilename_0_svc(char *, struct svc_req *);
+extern int* setfilename_0(char*, CLIENT*);
+extern int* setfilename_0_svc(char*, struct svc_req*);
 #define appendContent 1
-extern  bool_t * appendcontent_0(Content *, CLIENT *);
-extern  bool_t * appendcontent_0_svc(Content *, struct svc_req *);
+extern bool_t* appendcontent_0(Content*, CLIENT*);
+extern bool_t* appendcontent_0_svc(Content*, struct svc_req*);
 #define readContent 2
-extern  Content * readcontent_0(int *, CLIENT *);
-extern  Content * readcontent_0_svc(int *, struct svc_req *);
+extern Content* readcontent_0(int*, CLIENT*);
+extern Content* readcontent_0_svc(int*, struct svc_req*);
 #define closeFile 3
-extern  bool_t * closefile_0(int *, CLIENT *);
-extern  bool_t * closefile_0_svc(int *, struct svc_req *);
+extern bool_t* closefile_0(int*, CLIENT*);
+extern bool_t* closefile_0_svc(int*, struct svc_req*);
 #define listFile 4
-extern  char * listfile_0(void *, CLIENT *);
-extern  char * listfile_0_svc(void *, struct svc_req *);
-extern int file_transfer_0_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
+extern char* listfile_0(void*, CLIENT*);
+extern char* listfile_0_svc(void*, struct svc_req*);
+extern int file_transfer_0_freeresult(SVCXPRT*, xdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define setFileName 0
-extern  int * setfilename_0();
-extern  int * setfilename_0_svc();
+extern int* setfilename_0();
+extern int* setfilename_0_svc();
 #define appendContent 1
-extern  bool_t * appendcontent_0();
-extern  bool_t * appendcontent_0_svc();
+extern bool_t* appendcontent_0();
+extern bool_t* appendcontent_0_svc();
 #define readContent 2
-extern  Content * readcontent_0();
-extern  Content * readcontent_0_svc();
+extern Content* readcontent_0();
+extern Content* readcontent_0_svc();
 #define closeFile 3
-extern  bool_t * closefile_0();
-extern  bool_t * closefile_0_svc();
+extern bool_t* closefile_0();
+extern bool_t* closefile_0_svc();
 #define listFile 4
-extern  char * listfile_0();
-extern  char * listfile_0_svc();
-extern int file_transfer_0_freeresult ();
+extern char* listfile_0();
+extern char* listfile_0_svc();
+extern int file_transfer_0_freeresult();
 #endif /* K&R C */
 
 /* the xdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
-extern  bool_t xdr_FileName (XDR *, FileName);
-extern  bool_t xdr_FileList (XDR *, FileList);
-extern  bool_t xdr_Chunk (XDR *, Chunk);
-extern  bool_t xdr_Content (XDR *, Content*);
+extern bool_t xdr_FileName(XDR*, FileName);
+extern bool_t xdr_FileList(XDR*, FileList);
+extern bool_t xdr_Chunk(XDR*, Chunk);
+extern bool_t xdr_Content(XDR*, Content*);
 
 #else /* K&R C */
-extern bool_t xdr_FileName ();
-extern bool_t xdr_FileList ();
-extern bool_t xdr_Chunk ();
-extern bool_t xdr_Content ();
+extern bool_t xdr_FileName();
+extern bool_t xdr_FileList();
+extern bool_t xdr_Chunk();
+extern bool_t xdr_Content();
 
 #endif /* K&R C */
 

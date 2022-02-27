@@ -6,62 +6,60 @@
 
 #include "file_transfer.h"
 
-int *
-setfilename_0_svc(char *argp, struct svc_req *rqstp)
+int* setfilename_0_svc(char* argp, struct svc_req* rqstp)
 {
-	static int  result;
+    static int result;
 
-	/*
-	 * insert server code here
-	 */
+    /*
+     * insert server code here
+     */
 
-	return &result;
+    return &result;
 }
 
-bool_t *
-appendcontent_0_svc(Content *argp, struct svc_req *rqstp)
+bool_t*
+appendcontent_0_svc(Content* argp, struct svc_req* rqstp)
 {
-	static bool_t  result;
+    static bool_t result;
 
-	/*
-	 * insert server code here
-	 */
+    /*
+     * insert server code here
+     */
 
-	return &result;
+    return &result;
 }
 
-Content *
-readcontent_0_svc(int *argp, struct svc_req *rqstp)
+Content*
+readcontent_0_svc(int* argp, struct svc_req* rqstp)
 {
-	static Content  result;
+    static Content result;
 
-	/*
-	 * insert server code here
-	 */
+    /*
+     * insert server code here
+     */
 
-	return &result;
+    return &result;
 }
 
-bool_t *
-closefile_0_svc(int *argp, struct svc_req *rqstp)
+bool_t*
+closefile_0_svc(int* argp, struct svc_req* rqstp)
 {
-	static bool_t  result;
+    static bool_t result;
 
-	/*
-	 * insert server code here
-	 */
+    /*
+     * insert server code here
+     */
 
-	return &result;
+    return &result;
 }
 
-char *
-listfile_0_svc(void *argp, struct svc_req *rqstp)
+char* listfile_0_svc(void* argp, struct svc_req* rqstp)
 {
-	static char  result;
+    static char result;
 
-	/*
-	 * insert server code here
-	 */
+    /*
+     * insert server code here
+     */
 
-	return &result;
+    return &result;
 }

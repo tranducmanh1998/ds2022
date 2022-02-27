@@ -6,66 +6,62 @@
 
 #include "file_transfer.h"
 
-
-void
-file_transfer_0(char *host)
+void file_transfer_0(char* host)
 {
-	CLIENT *clnt;
-	int  *result_1;
-	char  setfilename_0_arg;
-	bool_t  *result_2;
-	Content  appendcontent_0_arg;
-	Content  *result_3;
-	int  readcontent_0_arg;
-	bool_t  *result_4;
-	int  closefile_0_arg;
-	char  *result_5;
-	char *listfile_0_arg;
+    CLIENT* clnt;
+    int* result_1;
+    char setfilename_0_arg;
+    bool_t* result_2;
+    Content appendcontent_0_arg;
+    Content* result_3;
+    int readcontent_0_arg;
+    bool_t* result_4;
+    int closefile_0_arg;
+    char* result_5;
+    char* listfile_0_arg;
 
-#ifndef	DEBUG
-	clnt = clnt_create (host, FILE_TRANSFER, FILE_TRANSFER_VER, "udp");
-	if (clnt == NULL) {
-		clnt_pcreateerror (host);
-		exit (1);
-	}
-#endif	/* DEBUG */
+#ifndef DEBUG
+    clnt = clnt_create(host, FILE_TRANSFER, FILE_TRANSFER_VER, "udp");
+    if (clnt == NULL) {
+        clnt_pcreateerror(host);
+        exit(1);
+    }
+#endif /* DEBUG */
 
-	result_1 = setfilename_0(&setfilename_0_arg, clnt);
-	if (result_1 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	result_2 = appendcontent_0(&appendcontent_0_arg, clnt);
-	if (result_2 == (bool_t *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	result_3 = readcontent_0(&readcontent_0_arg, clnt);
-	if (result_3 == (Content *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	result_4 = closefile_0(&closefile_0_arg, clnt);
-	if (result_4 == (bool_t *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	result_5 = listfile_0((void*)&listfile_0_arg, clnt);
-	if (result_5 == (char *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-#ifndef	DEBUG
-	clnt_destroy (clnt);
-#endif	 /* DEBUG */
+    result_1 = setfilename_0(&setfilename_0_arg, clnt);
+    if (result_1 == (int*)NULL) {
+        clnt_perror(clnt, "call failed");
+    }
+    result_2 = appendcontent_0(&appendcontent_0_arg, clnt);
+    if (result_2 == (bool_t*)NULL) {
+        clnt_perror(clnt, "call failed");
+    }
+    result_3 = readcontent_0(&readcontent_0_arg, clnt);
+    if (result_3 == (Content*)NULL) {
+        clnt_perror(clnt, "call failed");
+    }
+    result_4 = closefile_0(&closefile_0_arg, clnt);
+    if (result_4 == (bool_t*)NULL) {
+        clnt_perror(clnt, "call failed");
+    }
+    result_5 = listfile_0((void*)&listfile_0_arg, clnt);
+    if (result_5 == (char*)NULL) {
+        clnt_perror(clnt, "call failed");
+    }
+#ifndef DEBUG
+    clnt_destroy(clnt);
+#endif /* DEBUG */
 }
 
-
-int
-main (int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-	char *host;
+    char* host;
 
-	if (argc < 2) {
-		printf ("usage: %s server_host\n", argv[0]);
-		exit (1);
-	}
-	host = argv[1];
-	file_transfer_0 (host);
-exit (0);
+    if (argc < 2) {
+        printf("usage: %s server_host\n", argv[0]);
+        exit(1);
+    }
+    host = argv[1];
+    file_transfer_0(host);
+    exit(0);
 }
