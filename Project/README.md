@@ -40,3 +40,35 @@
 - write file
 
 **Warning**: architecture will vary and do not trust it, trust code.
+
+## Setup
+
+Requirement:
+
+1. CMake
+2. make
+3. gcc
+4. Linux
+
+Install:
+
+```
+mkdir build
+cd build
+cmake ../
+```
+
+Build:
+
+```
+cd build
+make -j
+```
+
+Generate clangd setting for vim lsp:
+
+```
+cd build
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../
+cp compile_commands.json ../
+```
