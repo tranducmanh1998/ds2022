@@ -247,7 +247,7 @@ int main(int argc, char* argv[])
                 printf("Ambiguous error while process host %s\n", ptr->host);
             ptr = ptr->next;
         }
-    } else if (strcmp(argv[2], "download")) {
+    } else if (strcmp(argv[2], "download") == 0) {
         loadFile();
         while (ptr != NULL) {
             process(ptr->host, 1); // find file in server
