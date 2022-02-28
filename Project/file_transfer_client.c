@@ -28,7 +28,8 @@ void list(char* string)
     strcpy(file_list_cpy, string);
 
     char* token = strtok(file_list_cpy, " ");
-    printf("%s\n", token);
+    if (token != NULL)
+        printf("%s\n", token);
     while ((token = strtok(NULL, " ")) != NULL)
         printf("%s\n", token);
 }
@@ -149,11 +150,10 @@ void process(char* host, int mode)
 #ifndef DEBUG
     clnt = clnt_create(host, FILE_TRANSFER, FILE_TRANSFER_VER, "udp");
     if (clnt == NULL) {
-        printf("Could not connect to server...\n");
+        printf("Could not connect to server (%s)\n", host);
         clnt_pcreateerror(host);
         exit(1);
     }
-    printf("Connecting to server...\n");
 #endif /* DEBUG */
 
     switch (mode) {
@@ -202,16 +202,25 @@ void loadHost(char* hostFile, Host* host)
         printf("Could not load host from file %s", hostFile);
 
     char hostString[1000];
+    memset(hostString, 0, sizeof(hostString));
     read(fd, hostString, 1000); // don't do like this, but I don't care
 
+    /* load first host */
     char* token = strtok(hostString, "\n");
-    memcpy(host->host, token, 255);
+    memcpy(host->host, token, strlen(token));
+    host->next = NULL;
+    printf("load host: (%s)\n", host->host);
+
+    /* load next host */
     while ((token = strtok(NULL, "\n")) != NULL) {
-        Host* next = (Host*)malloc(sizeof(Host));
-        memcpy(next->host, token, 255);
-        next->next = NULL;
-        host->next = next;
-        host = next;
+        if (strlen(token) > 1) {
+            Host* next = (Host*)malloc(sizeof(Host));
+            memcpy(next->host, token, strlen(token));
+            printf("load host: (%s)\n", next->host);
+            next->next = NULL;
+            host->next = next;
+            host = next;
+        }
     }
 }
 
