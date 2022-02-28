@@ -7,6 +7,8 @@
 #include "file_transfer.h"
 #include <dirent.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 int* setfilename_0_svc(char* argp, struct svc_req* rqstp)
@@ -42,6 +44,7 @@ readcontent_0_svc(int* argp, struct svc_req* rqstp)
      */
     int size = read(*argp, result.array, 1000);
     result.size = size;
+    result.fd = *argp;
     return &result;
 }
 
@@ -67,8 +70,14 @@ Content* listfile_0_svc(void* argp, struct svc_req* rqstp)
     int idx = 0;                   // index of result
     DIR* dirStream = opendir("."); // point to directory stream
     struct dirent* dir;            // hold element in directory stream
+    struct stat path;              // path information
 
     while ((dir = readdir(dirStream)) != NULL) {
+        /* check file is real file */
+        stat(dir->d_name, &path);
+        if (!S_ISREG(path.st_mode)) // get regular file only
+            continue;
+
         /* copy name to string */
         memcpy(result.array + idx, dir->d_name, strlen(dir->d_name));
         idx += strlen(dir->d_name);
