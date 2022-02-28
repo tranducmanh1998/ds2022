@@ -73,6 +73,42 @@ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../
 cp compile_commands.json ../
 ```
 
+## Run program
+
+Generate rpcbind
+
+```
+sudo rpcbind
+```
+
+Run servers
+
+```
+cd build
+mkdir data
+cd data
+../1.rpc_server
+```
+
+Update server ip to client side
+
+```
+cd build
+echo "<host>" >> hosts.txt
+```
+
+Run client
+
+```
+cd build
+./2.rpc_server hosts.txt <OPTION>
+
+OPTION:
+1. list
+2. download
+3. upload
+```
+
 ## Bug
 
 1. Could not recognize file name with space
