@@ -36,11 +36,11 @@ void list(char* string)
 
 bool_t hasFile(char* string, char* fileName)
 {
-    char file_list_cpy[strlen(string)];
+    char file_list_cpy[strlen(string) + 1];
     strcpy(file_list_cpy, string);
 
     char* token = strtok(file_list_cpy, " ");
-    if (strcmp(token, fileName) == 0)
+    if (token != NULL && strcmp(token, fileName) == 0)
         return TRUE;
     while ((token = strtok(NULL, " ")) != NULL)
         if (strcmp(token, fileName) == 0)
@@ -59,10 +59,12 @@ void upload(CLIENT* clnt)
 
     /* open client side file */
     int cfd = open(clientFile, O_RDWR);
+    printf("Connected to client file %s in fd(%d)\n", clientFile, cfd);
 
     /* create file */
     memcpy(serverFileCpy, serverFile, 255);
     serverFd = setfilename_0(serverFileCpy, clnt);
+    printf("Connected to server file %s in fd(%d)\n", serverFile, *serverFd);
     if (serverFd == (int*)NULL) {
         clnt_perror(clnt, "call failed: could not open server file");
         exit(1);
@@ -168,10 +170,12 @@ void process(char* host, int mode)
             flag = 0;
         break;
     case 2: // download file from server
+        printf("Start download from %s to %s\n", serverFile, clientFile);
         download(clnt);
         flag = 1;
         break;
     case 3: // upload file to server
+        printf("Start upload from %s to %s\n", clientFile, serverFile);
         upload(clnt);
         flag = 1;
         break;
