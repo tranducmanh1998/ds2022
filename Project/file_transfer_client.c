@@ -203,11 +203,11 @@ void loadHost(char* hostFile, Host* host)
 
     char hostString[1000];
     memset(hostString, 0, sizeof(hostString));
-    read(fd, hostString, 1000); // don't do like this, but I don't care
+    int size = read(fd, hostString, 1000); // don't do like this, but I don't care
 
     /* load first host */
     char* token = strtok(hostString, "\n");
-    memcpy(host->host, token, strlen(token));
+    memcpy(host->host, token, strlen(token) + 1);
     host->next = NULL;
     printf("load host: (%s)\n", host->host);
 
