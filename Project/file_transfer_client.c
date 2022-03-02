@@ -190,7 +190,7 @@ void process(char* host, int mode)
 
 void loadFile()
 {
-    printf("Warning: pas d'espace dans le nom du fichier\n");
+    printf("Warning: no space in file name\n");
     printf("client file: ");
     scanf("%s", clientFile);
     printf("server file: ");
