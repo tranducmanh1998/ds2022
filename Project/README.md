@@ -47,8 +47,10 @@ Requirement:
 
 1. CMake
 2. make
-3. gcc
+3. gcc, g++
 4. Linux
+5. libtirpc-dev
+6. rpcbind
 
 Install:
 
@@ -63,6 +65,15 @@ Build:
 ```
 cd build
 make -j
+```
+
+Note: for ubuntu
+
+```
+make -f Makefile.file_transfer
+rm *.o
+mv file_transfer_client build/2.rpc_client
+mv file_transfer_server build/1.rpc_server
 ```
 
 Generate clangd setting for vim lsp:
@@ -101,7 +112,7 @@ Run client
 
 ```
 cd build
-./2.rpc_server hosts.txt <OPTION>
+./2.rpc_client hosts.txt <OPTION>
 
 OPTION:
 1. list
