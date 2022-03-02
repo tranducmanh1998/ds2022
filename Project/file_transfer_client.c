@@ -283,9 +283,10 @@ int main(int argc, char* argv[])
         } else {
             srand(time(NULL));
             int num = rand() % numHost;
-            for (int i = 0; i < numHost; i++)
+            for (int i = 0; i <= num; i++)
                 if (ptr->next != NULL)
                     ptr = ptr->next;
+            printf("Upload to server: %s\n", ptr->host);
             flag = 0;
             process(ptr->host, 3);
             if (flag != 1)
